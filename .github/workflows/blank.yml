@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: CI
     env: 
-       CF_IMAGE: mstantoncf/gowd:${{ env.GITHUB_SHA::8 }}
+       CF_IMAGE: mstantoncf/gowd:${{ GITHUB_SHA::8 }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
