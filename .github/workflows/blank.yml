@@ -31,5 +31,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: csdp-report-image
+        env: 
+           CF_API_KEY: ${{ secrets.CF_API_KEY }}
+           CF_HOST: ${{ secrets.CF_HOST }}
+           CF_CONTAINER_REGISTRY_INTEGRATION: ${{ secrets.CF_CONTAINER_REGISTRY_INTEGRATION }}
         uses: codefresh-io/codefresh-report-image@Marketplace
 
