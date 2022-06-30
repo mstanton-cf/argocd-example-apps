@@ -20,17 +20,16 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: CI
-    env: 
-       CF_IMAGE: mstantoncf/gowd:${{ GITHUB_SHA::8 }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -46,7 +45,7 @@ jobs:
         with:
           context: "{{defaultContext}}:mysubdir"
           push: true
-          tags: ${{ env.CF_IMAGE }}
+          tags: mstantoncf/gowd:${{ steps.vars.outputs.sha_short }}
 
       # Runs a set of commands using the runners shell
       - name: csdp-report-image
@@ -54,7 +53,7 @@ jobs:
            CF_API_KEY: ${{ secrets.CF_API_KEY }}
            CF_HOST: ${{ secrets.CF_HOST }}
            CF_CONTAINER_REGISTRY_INTEGRATION: ${{ secrets.CF_CONTAINER_REGISTRY_INTEGRATION }}
-           CF_IMAGE: ${{ env.CF_IMAGE }}
+           CF_IMAGE: mstantoncf/gowd:${{ steps.vars.outputs.sha_short }}
            
         uses: codefresh-io/codefresh-report-image@Marketplace
 
