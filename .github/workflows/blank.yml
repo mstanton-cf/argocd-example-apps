@@ -46,7 +46,7 @@ jobs:
         with:
           context: "{{defaultContext}}:mysubdir"
           push: true
-          tags: $CF_IMAGE
+          tags: ${{ env.CF_IMAGE }}
 
       # Runs a set of commands using the runners shell
       - name: csdp-report-image
@@ -54,6 +54,7 @@ jobs:
            CF_API_KEY: ${{ secrets.CF_API_KEY }}
            CF_HOST: ${{ secrets.CF_HOST }}
            CF_CONTAINER_REGISTRY_INTEGRATION: ${{ secrets.CF_CONTAINER_REGISTRY_INTEGRATION }}
+           CF_IMAGE: ${{ env.CF_IMAGE }}
            
         uses: codefresh-io/codefresh-report-image@Marketplace
 
