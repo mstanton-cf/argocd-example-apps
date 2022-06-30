@@ -53,6 +53,7 @@ jobs:
            CF_API_KEY: ${{ secrets.CF_API_KEY }}
            CF_HOST: ${{ secrets.CF_HOST }}
            CF_CONTAINER_REGISTRY_INTEGRATION: ${{ secrets.CF_CONTAINER_REGISTRY_INTEGRATION }}
+           CF_GITHUB_TOKEN: ${{ secrets.CF_GITHUB_TOKEN }}
            CF_IMAGE: mstantoncf/gowd:${{ steps.vars.outputs.sha_short }}
            CF_ENRICHERS: "git"
            
